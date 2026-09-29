@@ -89,22 +89,17 @@ export class DesktopCommanderClient {
   async callTool(name: string, args: Record<string, unknown>): Promise<CallToolResult> {
     await this.ensureReady();
 
-    try {
-      return (await this.client!.callTool({
-        name,
-        arguments: args,
-        _meta: {
-          remote: true,
-          clientInfo: { name: "remote-dev-mcp", version: "0.1.0" },
-        },
-      } as never)) as CallToolResult;
-    } catch (error) {
-      // A broken stdio child should be retried on the next gateway call rather
-      // than wedging the gateway process forever.
-      this.client = null;
-      this.transport = null;
-      throw error;
-    }
+    // Transport lifecycle, not an arbitrary tool error, decides whether the
+    // downstream is dead. The MCP SDK calls client.onclose when stdio closes;
+    // clearing references for every thrown tool error could orphan a live child.
+    return (await this.client!.callTool({
+      name,
+      arguments: args,
+      _meta: {
+        remote: true,
+        clientInfo: { name: "remote-dev-mcp", version: "0.1.0" },
+      },
+    } as never)) as CallToolResult;
   }
 
   async status(): Promise<{
