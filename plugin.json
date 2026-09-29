@@ -1,0 +1,6 @@
+{
+  "name": "remote-dev-mcp",
+  "description": "Wrapper connector for Remote Desktop Commander",
+  "version": "0.1.0",
+  "mcpServers": ".mcp.json"
+}

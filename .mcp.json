@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "remote-dev-mcp": {
+      "type": "http",
+      "url": "https://mcp.desktopcommander.app/mcp"
+    }
+  }
+}
