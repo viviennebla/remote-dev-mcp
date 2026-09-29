@@ -1,0 +1,13 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "viviennebla/remote-dev-mcp",
+  "title": "Remote Dev MCP",
+  "description": "Thin wrapper around Remote Desktop Commander hosted MCP endpoint",
+  "version": "0.1.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.desktopcommander.app/mcp"
+    }
+  ]
+}
